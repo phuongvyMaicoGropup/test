@@ -8,33 +8,21 @@ namespace StoreManage.Products.Fan
 {
     class DefaultFan : Fan
     {
+        public new string Name = "Quạt đứng";
         public override void InputProduct()
         {
             base.InputProduct();
-            bool check = true;
-            do
-            {
-                try
-                {
-                    Write("\t\tSố lượng bán ra : ");
-                    amount = Convert.ToInt32(ReadLine());
-                    if (amount <= 0) check = false;
-                }
-                catch (Exception error)
-                {
-                    WriteLine("\t\t" + error.Message + " Sai định dạng ");
-                }
-            } while (check == false);
+            Helpers.AddQuantity("\t\t\tNhập số lượng hàng : ", ref Amount);
         }
 
-        public override double Price()
+        public override double Price() => 500;
+
+        public override void ReturnInfoProduct()
         {
-            return 500;
+            base.ReturnInfoProduct();
+            base.AddInfoProduct();
+
         }
 
-        public override string ReturnInfoProduct()
-        {
-            return $" \t\tMã sản phẩm {id}. Quạt đứng {name} . Sản xuất tại  {madeIn} . Đơn giá {Price()} . Số lượng {amount} . Tổng giá {Price() * amount} \n ";
-        }
     }
 }

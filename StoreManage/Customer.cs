@@ -51,12 +51,12 @@ namespace StoreManage
 
         public void InputInfo()
         {
-            WriteLine("Thông tin khách hàng:"); 
-            Write("\tMã khách hàng");
+            
+            Write("\tMã khách hàng: ");
             Id = ReadLine();
-            Write("\tTên khách hàng:");
+            Write("\tTên khách hàng: ");
             UserName = ReadLine();
-            Write("\tĐịa chỉ:");
+            Write("\tĐịa chỉ: ");
             Address = ReadLine();
             Write("\tSố điện thoại: ");
             PhoneNumber = ReadLine(); 
@@ -64,8 +64,14 @@ namespace StoreManage
         }
         public string PrintInfo()
         {
-            return $"\t {Id} {UserName} {Address} {PhoneNumber} \n";
+            string Output = "";
+            Output += $"\tMã khách hàng: {Id,-80}\n";
+            Output += $"\tTên khách hàng: {UserName,-80}\n";
+            Output += $"\tĐịa chỉ khách hàng: {Address,-80}\n";
+            Output += $"\tSố điện thoại khách hàng: {PhoneNumber,-80}\n";
+            return Output; 
         }
+      
 
     }
 }

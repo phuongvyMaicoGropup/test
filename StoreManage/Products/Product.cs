@@ -8,34 +8,11 @@ namespace StoreManage.Products
 {
     public abstract class Product
     {
-        protected string id;
-        protected string name;
-        protected string madeIn;
-        protected int amount;
-
-        public string Id
-        {
-            set => id = value;
-            get => id;
-        }
-
-        public string Name
-        {
-            set => name = value;
-            get => name;
-        }
-
-        public string MadeIn
-        {
-            set => madeIn = value;
-            get => madeIn;
-        }
-
-        public int Amount
-        {
-            set => amount = value;
-            get => amount;
-        }
+        public string Id;
+        public string Name;
+        public string MadeIn;
+        public int Amount;
+        public string Output=""; 
 
 
         public virtual void InputProduct()
@@ -50,6 +27,18 @@ namespace StoreManage.Products
 
 
         public abstract double Price();
-        public abstract string ReturnInfoProduct(); 
+        public virtual void ReturnInfoProduct()
+        {
+            Output = $"\tMã số sản phẩm : {Id,-60}\n";
+            Output += $"\tTên sản phẩm : {Name,-60}\n";
+            Output += $"\tNơi sản xuất: {MadeIn,-60}\n";
+        }
+        public virtual void AddInfoProduct()
+        {
+            Output += $"\tĐơn giá : {Price(),-60} \n";
+            Output += $"\tSố sản phẩm bán : {Amount,-60}\n";
+            Output += $"\tTổng tiền đơn : {Amount * Price(),-60}\n";
+            Output += "\t--------------------------------------------------\n";
+        }
     }
 }

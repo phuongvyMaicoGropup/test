@@ -9,51 +9,22 @@ namespace StoreManage.Products.Fan
 {
     class ElectricFan : Fan
     {
-        int battery = 0;    
+        int Battery = 0;
+        public new string Name = "Quạt cắm sạc";
         public override void InputProduct()
         {
             base.InputProduct();
-            bool check = true;
-            do
-            {
-                try
-                {
-                    Write("\t\t\tDung lượng pin: ");
-                    battery = Convert.ToInt32(ReadLine());
-                    if (battery <= 0) check = false;
-                }
-                catch (Exception error)
-                {
-                    WriteLine("\t\t" + error.Message + " Sai định dạng ");
-                    check = false;
-                }
-            } while (check == false);
-            
-            check = true;
-            do
-            {
-                try
-                {
-                    Write("\t\tSố lượng bán ra : ");
-                    amount = Convert.ToInt32(ReadLine());
-                    if (amount <= 0) check = false;
-                }
-                catch (Exception error)
-                {
-                    WriteLine("\t\t" + error.Message + " Sai định dạng ");
-                    check = false;
-                }
-            } while (check == false);
+            Helpers.AddQuantity("\t\t\tNhập dung lượng pin: ", ref Battery);
+            Helpers.AddQuantity("\t\t\tNhập số lượng hàng: ", ref Amount);
         }
 
-        public override double Price()
-        {           
-             return battery * 500;
-        }
+        public override double Price() => Battery * 500;
 
-        public override string ReturnInfoProduct()
+        public override void ReturnInfoProduct()
         {
-            return $" \t\tMã sản phẩm {id}. Quạt sạc pin {name} dung lượng {battery}. Sản xuất tại  {madeIn} . Đơn giá {Price()} . Số lượng {amount} . Tổng giá {Price() * amount} \n ";
+            base.ReturnInfoProduct();
+            Output += $"\tDung lượng pin: {Battery,-80}\n";
+            base.AddInfoProduct();
         }
     }
 }

@@ -12,9 +12,5 @@ namespace StoreManage.Products.Fan
         {
             base.InputProduct();
         }
-
-    
-
-        
     }
 }

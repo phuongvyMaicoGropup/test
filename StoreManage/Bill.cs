@@ -13,162 +13,119 @@ namespace StoreManage
 {
     public class Bill
     {
+        public class Date
+        {
+            public int Day;
+            public int Month;
+            public int Year;
+            
+        }
         public Customer customer = new Customer();
         private string id;
-        private DateTime dateCreate = DateTime.Now;
-        private double totalCost;
+        private Date dateCreate = new Date();
+        private double TotalCost;
         private Product[] products;
-        private int amount;
-        private string output = "";
+        private int TotalProduct;
 
-        public string Id
-        {
-            set => id = value;
-            get => Id; 
-        }
+        public string Id;
+        public string Name ;
 
         public void InputBill()
         {
             Write("Mã hóa đơn:");
             Id = ReadLine();
-            WriteLine($"Ngày lập hóa đơn: {dateCreate.Day} /{dateCreate.Month} /{dateCreate.Year}  ");
-            customer.InputInfo();
-            WriteLine("Nhập danh sách các chi tiết hóa đơn:");
-            bool check;
-            do
-            {
-                try
-                {
-                    check = true;
-                    Write("\tSố lượng chi tiết trong danh sách cac chi tiết hóa đơn: ");
-                    amount = Convert.ToInt32(ReadLine());
-                    if (amount <= 0) check = false;
-                }
-                catch (Exception error)
-                {
-                    Console.WriteLine("\t\t" + error.Message + " Sai định dạng ");
-                    check = false;
-                }
-            } while (check == false);
-            
-            products = new Product[amount]; 
-            for (int i = 0; i< amount; i++)
-            {
-                WriteLine($"\tNhập chi tiết hóa đơn thứ {i + 1}");
-                int answer = -1;
-                do
-                {
-                    try
-                    {
-                        check = true;
-                        Write("\t\tChọn loại thiết bị điện (1-máy quạt, 2- máy lạnh):");
-                        answer = Convert.ToInt32(ReadLine());
-                        if (answer <= 0) check = false;
-                    }
-                    catch (Exception error)
-                    {
-                        WriteLine("\t" + error.Message + "Sai định dạng ");
-                        check = false;
-                    }
-                } while (answer != 1 && answer != 2 || check == false) ;
-                if (answer == 1)
-                {
 
-                    int TypeOfFan = -1 ;
-                    do
-                    {
-                        try
-                        {
-                            check = true;
-                            Write("\t\t\tChọn loại máy quạt (1-máy quạt đứng,2- máy quạt hơi nước,3 – máy quạt sạc điện): ");
-                            TypeOfFan = Convert.ToInt32(ReadLine());
-                        }
-                        catch (Exception error)
-                        {
-                            WriteLine("\t" + error.Message + "Sai định dạng ");
-                            check = false;
-                        }
-                    } while (TypeOfFan != 1 && TypeOfFan!=2 && TypeOfFan != 3 || check == false);
-                    check = true;
-                    do
-                    {
-                        switch (TypeOfFan)
-                        {
-                            case 1:
-                                check = true;
-                                products[i] = new DefaultFan();
-                                break;
-                            case 2:
-                                check = true;
-                                products[i] = new SteamFan();
-                                break;
-                            case 3:
-                                products[i] = new ElectricFan(); 
-                                check = true;
-                                break;
-                            default:
-                                check = false;
-                                break;
-                        }
-                    } while (check == false);
-                }
-                else
-                {
-                    int TypeOfAirConditioner = -1;
-                    do
-                    {
-                        try
-                        {
-                            check = true;
-                            Write("\t\t\tChọn loại máy lạnh (1-máy lạnh một chiều,2- máy lạnh hai chiều ): ");
-                            TypeOfAirConditioner = Convert.ToInt32(ReadLine());
-                        }
-                        catch (Exception error)
-                        {
-                            WriteLine("\t" + error.Message + "Sai định dạng ");
-                            check = false;
-                        }
-                    } while (TypeOfAirConditioner != 1 && TypeOfAirConditioner != 2 || check == false);
-                    
-                    do
-                    {
-                        switch (TypeOfAirConditioner)
-                        {
-                            case 1:
-                                check = true;
-                                products[i] = new OneWayAirConditioner();
-                                break;
-                            case 2:
-                                check = true;
-                                products[i] = new TwoWayAirConditioner();
-                                break;
-                            default:
-                                check = false;
-                                break;
-                        }
-                    } while (check == false);
-                }
-                products[i].InputProduct();
-                output+= products[i].ReturnInfoProduct();
-                totalCost += products[i].Price()* products[i].Amount; 
+            WriteLine("Ngày lập hóa đơn: ");
+            Helpers.AddQuantity("-Nhập ngày  : ", ref dateCreate.Day);
+            Helpers.AddQuantity("-Nhập tháng : ", ref dateCreate.Month);
+            Helpers.AddQuantity("-Nhập năm   : ", ref dateCreate.Year);
+            
+
+            WriteLine("Thông tin khách hàng:");
+            customer.InputInfo();
+
+            WriteLine("Nhập danh sách các chi tiết hóa đơn: ");
+            Helpers.AddQuantity("\tSố lượng chi tiết trong danh sách cac chi tiết hóa đơn:", ref TotalProduct);
+            products = new Product[TotalProduct]; 
+            for (int i = 0; i< TotalProduct; i++)
+            {
+                InputDetailBill(i);
+                
+                
             }
 
             
         }
+
+        public void InputDetailBill(int index)
+        {
+            WriteLine($"\tNhập chi tiết hóa đơn thứ {index+1}: ");
+            int Answer = -1;
+            Helpers.ChooseTwoOption(1, 2, "\t\tChọn loại thiết bị điện (1-máy quạt, 2- máy lạnh):", ref Answer);
+            
+            if (Answer == 1)
+            {
+
+                int TypeOfFan = -1;
+                Helpers.ChooseThreeOption(1, 2, 3, "\t\t\tChọn loại máy quạt (1-máy quạt đứng,2- máy quạt hơi nước,3 – máy quạt sạc điện): ", ref TypeOfFan);
+                switch (TypeOfFan)
+                {
+                    case 1:
+                        products[index] = new DefaultFan();
+                        break;
+                    case 2:
+                        products[index] = new SteamFan();
+                        break;
+                    case 3:
+                        products[index] = new ElectricFan();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                int TypeOfAirConditioner = -1;
+                Helpers.ChooseTwoOption(1, 2, "\t\t\tChọn loại máy lạnh (1-máy lạnh một chiều,2- máy lạnh hai chiều ):", ref TypeOfAirConditioner);
+                switch (TypeOfAirConditioner)
+                {
+                    case 1:
+                        products[index] = new OneWayAirConditioner();
+                        break;
+                    case 2:
+                        products[index] = new TwoWayAirConditioner();
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            products[index].InputProduct();
+            TotalCost += products[index].Price() * products[index].Amount;
+        }
         public void PrintBill(int index)
         {
-            var filename = $"danh_sach_hoa_don_{index}.txt";
-            string contentFile = "";
-            contentFile += $"\tHóa đơn : {id}  {dateCreate.Day} /{dateCreate.Month} /{dateCreate.Year}  {totalCost} \n";
-            contentFile += customer.PrintInfo();
-            contentFile += "\tDanh sách các chi tiết hóa đơn:\n";
-            contentFile += output; 
-            var directory_mydoc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\danh_sach_hoa_don_" + (index + 1) + ".txt", FileMode.Create);
+            StreamWriter sWriter = new StreamWriter(fs);
+            sWriter.WriteLine("\t--------------------------------------------------");
+            sWriter.WriteLine($"\tThông tin hóa đơn:");
+            sWriter.WriteLine($"\t Mã hóa đơn : {Id}");
+            sWriter.WriteLine($"\t Ngày lập   : {dateCreate.Day}/{dateCreate.Month}/{dateCreate.Year}");
+            sWriter.WriteLine($"\t Tổng giá   : {TotalCost}");
+            sWriter.WriteLine("\t--------------------------------------------------");
+            sWriter.WriteLine($"\tThông tin khách hàng :");
+            sWriter.WriteLine(customer.PrintInfo());
+            sWriter.WriteLine($"\t--------------------------------------------------");
+            sWriter.WriteLine();
+            sWriter.WriteLine("Danh sach cac chi tiet hoa don:");
 
-            var fullpath = Path.Combine(directory_mydoc, filename);
-            File.WriteAllText(fullpath, contentFile);
-
-            WriteLine($"File lưu tại {directory_mydoc}{Path.DirectorySeparatorChar}{filename}");
+            for (int i = 0; i < TotalProduct; i++)
+            {
+                products[i].ReturnInfoProduct();
+                sWriter.WriteLine(products[i].Output);
+            }
+            sWriter.Flush();
+            fs.Close();
         }
     }
 }
