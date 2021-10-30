@@ -8,46 +8,18 @@ namespace StoreManage
 {
     public class Customer
     {
-        private string id;
-        private string username;
-        private string phonenumber;
-        private string address;
+        private string Id;
+        private string UserName;
+        private string PhoneNumber;
+        private string Address;
 
-        public string Id
-        {
-            get => id;
-            set
-            {
-                id = value; 
-            }
-        }
+        public string GetId => Id;
 
-        public string PhoneNumber
-        {
-            get => phonenumber;
-            set
-            {
-                phonenumber = value; 
-            }
-        }
+        public string GetPhoneNumber => PhoneNumber;
 
-        public string Address
-        {
-            get => address;
-            set
-            {
-                address = value; 
-            }
-        }
+        public string GetAddress => Address;
 
-        public string UserName
-        {
-            get => username;
-            set
-            {
-                username = value; 
-            }
-        }
+        public string GetUserName => UserName;
 
         public void InputInfo()
         {
@@ -65,10 +37,10 @@ namespace StoreManage
         public string PrintInfo()
         {
             string Output = "";
-            Output += $"\tMã khách hàng: {Id,-80}\n";
-            Output += $"\tTên khách hàng: {UserName,-80}\n";
-            Output += $"\tĐịa chỉ khách hàng: {Address,-80}\n";
-            Output += $"\tSố điện thoại khách hàng: {PhoneNumber,-80}\n";
+            Output += $"\tMã khách hàng             : {GetId}\n";
+            Output += $"\tTên khách hàng            : {GetUserName}\n";
+            Output += $"\tĐịa chỉ khách hàng        : {GetAddress}\n";
+            Output += $"\tSố điện thoại khách hàng  : {GetPhoneNumber}\n";
             return Output; 
         }
       

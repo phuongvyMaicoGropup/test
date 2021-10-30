@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreManage.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,13 +11,13 @@ namespace StoreManage.Products.Fan
     class SteamFan : Fan
     {
         int Volume = 0;
-        public new string Name = "Quạt hơi nước";
+        public new string Name = "Quạt hơi nước ";
 
         public override void InputProduct()
         {
             base.InputProduct();
-            Helpers.AddQuantity("\t\t\tNhập dung tích nước (lít) : ", ref Volume);
-            Helpers.AddQuantity("\t\t\tSố lượng hàng bán : ", ref Amount); 
+            Helper.AddQuantity("\t\t\tNhập dung tích nước (lít) : ", ref Volume);
+            Helper.AddQuantity("\t\t\tSố lượng hàng bán : ", ref Amount); 
         }
 
         public override double Price() => Volume * 400;

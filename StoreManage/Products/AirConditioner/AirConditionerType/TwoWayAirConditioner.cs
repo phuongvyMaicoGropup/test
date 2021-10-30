@@ -1,4 +1,5 @@
-﻿using StoreManage.Services;
+﻿using StoreManage.Helpers;
+using StoreManage.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,15 @@ namespace StoreManage.Products.AirConditioner
 {
     class TwoWayAirConditioner : AirConditioner
     {
-        
+        public new string Name = "Máy lạnh hai chiều ";
 
         public override void InputProduct()
         {
             base.InputProduct();
-            Helpers.AddFeature(Antibacterial);
-            Helpers.AddFeature(Deodorization);
-            Helpers.AddFeature(Inverter);
-            Helpers.AddQuantity("\t\t\tNhập số lượng hàng : ", ref Amount);
+            Helper.AddFeature(Antibacterial);
+            Helper.AddFeature(Deodorization);
+            Helper.AddFeature(Inverter);
+            Helper.AddQuantity("\t\t\tNhập số lượng hàng : ", ref Amount);
 
         }
         

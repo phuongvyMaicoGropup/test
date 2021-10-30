@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreManage.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,12 @@ namespace StoreManage.Products.Fan
     class ElectricFan : Fan
     {
         int Battery = 0;
-        public new string Name = "Quạt cắm sạc";
+        public new string Name = "Quạt cắm sạc ";
         public override void InputProduct()
         {
             base.InputProduct();
-            Helpers.AddQuantity("\t\t\tNhập dung lượng pin: ", ref Battery);
-            Helpers.AddQuantity("\t\t\tNhập số lượng hàng: ", ref Amount);
+            Helper.AddQuantity("\t\t\tNhập dung lượng pin: ", ref Battery);
+            Helper.AddQuantity("\t\t\tNhập số lượng hàng: ", ref Amount);
         }
 
         public override double Price() => Battery * 500;

@@ -1,16 +1,15 @@
 ﻿using StoreManage.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreManage
+namespace StoreManage.Helpers
 {
-    public static class Helpers
+    public static class Helper
     {
- 
-        
         public static void AddFeature(Service service)
         {
             bool check;
@@ -97,6 +96,6 @@ namespace StoreManage
             } while (Answer != Option1 && Answer != Option2 && Answer != Option3 || check == false);
         }
 
-
+        
     }
 }

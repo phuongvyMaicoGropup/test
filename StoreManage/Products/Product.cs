@@ -12,7 +12,8 @@ namespace StoreManage.Products
         public string Name;
         public string MadeIn;
         public int Amount;
-        public string Output=""; 
+        protected string Output="";
+        public string GetOutput => Output; 
 
 
         public virtual void InputProduct()
@@ -20,7 +21,7 @@ namespace StoreManage.Products
             Write("\t\t\tNhập mã : ");
             Id = ReadLine();
             Write("\t\t\tTên sản phẩm: ");
-            Name = ReadLine();
+            Name = Name + ReadLine();
             Write("\t\t\tNơi sản xuất: ");
             MadeIn = ReadLine(); 
         }
@@ -29,15 +30,15 @@ namespace StoreManage.Products
         public abstract double Price();
         public virtual void ReturnInfoProduct()
         {
-            Output = $"\tMã số sản phẩm : {Id,-60}\n";
-            Output += $"\tTên sản phẩm : {Name,-60}\n";
-            Output += $"\tNơi sản xuất: {MadeIn,-60}\n";
+            Output =  $"\tMã số sản phẩm  : {Id}\n";
+            Output += $"\tTên sản phẩm    : {Name}\n";
+            Output += $"\tNơi sản xuất    : {MadeIn}\n";
         }
         public virtual void AddInfoProduct()
         {
-            Output += $"\tĐơn giá : {Price(),-60} \n";
-            Output += $"\tSố sản phẩm bán : {Amount,-60}\n";
-            Output += $"\tTổng tiền đơn : {Amount * Price(),-60}\n";
+            Output += $"\tĐơn giá         : {Price()} \n";
+            Output += $"\tSố sản phẩm bán : {Amount}\n";
+            Output += $"\tTổng tiền đơn   : {Amount * Price()}\n";
             Output += "\t--------------------------------------------------\n";
         }
     }

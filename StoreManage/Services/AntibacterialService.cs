@@ -8,6 +8,7 @@ namespace StoreManage.Services
 {
     class AntibacterialService : Service
     {
+
         public override double Cost()
         {
             if (Add == true) return 500;

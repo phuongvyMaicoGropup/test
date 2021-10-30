@@ -5,18 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
-using StoreManage.Services; 
+using StoreManage.Services;
+using StoreManage.Helpers;
 
 namespace StoreManage.Products.AirConditioner
 {
     class OneWayAirConditioner : AirConditioner
-    {        
-        
+    {
+        public new string Name = "Máy lạnh một chiều "; 
         public override void InputProduct()
         {
             base.InputProduct();
-            Helpers.AddFeature(Inverter);
-            Helpers.AddQuantity("\t\t\tNhập số lượng hàng : ", ref Amount); 
+            Helper.AddFeature(Inverter);
+            Helper.AddQuantity("\t\t\tNhập số lượng hàng : ", ref Amount); 
         }
 
         public override double Price() =>DefaultCost + Inverter.Cost();
