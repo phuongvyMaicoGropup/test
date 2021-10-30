@@ -117,7 +117,7 @@ namespace StoreManage
             sWriter.WriteLine(customer.PrintInfo());
             sWriter.WriteLine($"\t--------------------------------------------------");
             sWriter.WriteLine();
-            sWriter.WriteLine("Danh sach cac chi tiet hoa don:");
+            sWriter.WriteLine("\tDanh sach cac chi tiet hoa don:");
 
             for (int i = 0; i < TotalProduct; i++)
             {
