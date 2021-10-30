@@ -10,18 +10,18 @@ namespace StoreManage.Products.Fan
     class DefaultFan : Fan
     {
         public new string Name = "Quạt đứng ";
-        public override void InputProduct()
+        public override void Input()
         {
-            base.InputProduct();
+            base.Input();
             Helper.AddQuantity("\t\t\tNhập số lượng hàng : ", ref Amount);
         }
 
         public override double Price() => 500;
 
-        public override void ReturnInfoProduct()
+        public override void Output()
         {
-            base.ReturnInfoProduct();
-            base.AddInfoProduct();
+            base.Output();
+            base.Output2();
         }
 
     }

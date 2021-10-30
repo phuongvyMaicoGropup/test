@@ -6,40 +6,50 @@ using static System.Console;
 
 namespace StoreManage.Products
 {
-    public abstract class Product
+    public abstract class Product 
     {
-        public string Id;
-        public string Name;
-        public string MadeIn;
-        public int Amount;
-        protected string Output="";
-        public string GetOutput => Output; 
+        protected string Id;
+        protected string Name;
+        protected string Provider;
+        protected int Amount;
+        protected string SResult ="";
+        public string GetSResult => SResult;
+        public int GetAmount => Amount;
+        public string GetProvider => Provider;
+        public string GetId => Id;
+        public string GetName => Name; 
 
 
-        public virtual void InputProduct()
+        public virtual void Input()
         {
             Write("\t\t\tNhập mã : ");
             Id = ReadLine();
             Write("\t\t\tTên sản phẩm: ");
-            Name = Name + ReadLine();
+            Name =  ReadLine();
             Write("\t\t\tNơi sản xuất: ");
-            MadeIn = ReadLine(); 
+            Provider = ReadLine(); 
         }
 
 
         public abstract double Price();
-        public virtual void ReturnInfoProduct()
+        public virtual void Output()
         {
-            Output =  $"\tMã số sản phẩm  : {Id}\n";
-            Output += $"\tTên sản phẩm    : {Name}\n";
-            Output += $"\tNơi sản xuất    : {MadeIn}\n";
+            SResult =  $"\tMã số sản phẩm  : {Id}\n";
+            SResult += $"\tTên sản phẩm    : {Name}\n";
+            SResult += $"\tNơi sản xuất    : {Provider}\n";
         }
-        public virtual void AddInfoProduct()
+        public virtual void Output2()
         {
-            Output += $"\tĐơn giá         : {Price()} \n";
-            Output += $"\tSố sản phẩm bán : {Amount}\n";
-            Output += $"\tTổng tiền đơn   : {Amount * Price()}\n";
-            Output += "\t--------------------------------------------------\n";
+            SResult += $"\tĐơn giá         : {Price()} \n";
+            SResult += $"\tSố sản phẩm bán : {Amount}\n";
+            SResult += $"\tTổng tiền đơn   : {Amount * Price()}\n";
+            SResult += "\t--------------------------------------------------\n";
+        }
+
+      
+        public void ToString(string[] k, int line)
+        {
+            throw new NotImplementedException();
         }
     }
 }

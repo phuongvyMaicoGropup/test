@@ -8,9 +8,9 @@ namespace StoreManage.Products.Fan
 {
     public abstract class Fan : Product
     {
-        public override void InputProduct()
+        public override void Input()
         {
-            base.InputProduct();
+            base.Input();
         }
     }
 }

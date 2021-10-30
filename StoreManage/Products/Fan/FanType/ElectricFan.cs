@@ -12,20 +12,20 @@ namespace StoreManage.Products.Fan
     {
         int Battery = 0;
         public new string Name = "Quạt cắm sạc ";
-        public override void InputProduct()
+        public override void Input()
         {
-            base.InputProduct();
+            base.Input();
             Helper.AddQuantity("\t\t\tNhập dung lượng pin: ", ref Battery);
             Helper.AddQuantity("\t\t\tNhập số lượng hàng: ", ref Amount);
         }
 
         public override double Price() => Battery * 500;
 
-        public override void ReturnInfoProduct()
+        public override void Output()
         {
-            base.ReturnInfoProduct();
-            Output += $"\tDung lượng pin: {Battery,-80}\n";
-            base.AddInfoProduct();
+            base.Output();
+            SResult += $"\tDung lượng pin: {Battery}\n";
+            base.Output2();
         }
     }
 }

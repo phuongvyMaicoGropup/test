@@ -1,4 +1,5 @@
-﻿using StoreManage.Services;
+﻿using StoreManage.Helpers;
+using StoreManage.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,16 @@ namespace StoreManage.Products.AirConditioner
 {
     abstract class AirConditioner : Product
     {
-        public InverterService Inverter = new InverterService();
-        public AntibacterialService Antibacterial = new AntibacterialService();
-        public DeodorizationService Deodorization = new DeodorizationService();
-        public override void InputProduct()
+        public InverterService _Inverter = new InverterService();
+        public AntibacterialService _Antibacterial = new AntibacterialService();
+        public DeodorizationService _Deodorization = new DeodorizationService();
+        public double _DefaultCost = 1000; 
+        public override void Input()
         {
-            base.InputProduct();
+            base.Input();
+            Helper.AddService(_Inverter);
 
         }
-        public double DefaultCost = 1000; 
         
     }
 }

@@ -13,20 +13,20 @@ namespace StoreManage.Products.Fan
         int Volume = 0;
         public new string Name = "Quạt hơi nước ";
 
-        public override void InputProduct()
+        public override void Input()
         {
-            base.InputProduct();
+            base.Input();
             Helper.AddQuantity("\t\t\tNhập dung tích nước (lít) : ", ref Volume);
             Helper.AddQuantity("\t\t\tSố lượng hàng bán : ", ref Amount); 
         }
 
         public override double Price() => Volume * 400;
 
-        public override void ReturnInfoProduct()
+        public override void Output()
         {
-            base.ReturnInfoProduct();
-            Output += $"\tDung tích nước: {Volume,-80}\n";
-            base.AddInfoProduct();
+            base.Output();
+            SResult += $"\tDung tích nước: {Volume}\n";
+            base.Output2();
         }
     }
 }

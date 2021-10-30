@@ -1,5 +1,6 @@
 ﻿using StoreManage.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace StoreManage
@@ -11,19 +12,9 @@ namespace StoreManage
         {
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
-            int BillCount = 0;
-            Helper.AddQuantity("Số lượng hóa đơn muốn nhập : ", ref BillCount);
+            Menu menu = new Menu();
+            menu.Input(); 
 
-
-            Bill[] Bills = new Bill[BillCount];
-
-            for (int i = 0; i<BillCount; i++) 
-            {
-                Bills[i] = new Bill();
-                Bills[i].InputBill();
-            }
-            BillHelpers.PrintBillToFile(Bills,BillCount);
-            Menu(); 
         }
         public static void Menu()
         {

@@ -10,7 +10,7 @@ namespace StoreManage.Helpers
 {
     public static class Helper
     {
-        public static void AddFeature(Service service)
+        public static void AddService(Service service)
         {
             bool check;
             int value = -1; 

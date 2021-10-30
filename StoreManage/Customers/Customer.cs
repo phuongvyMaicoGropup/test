@@ -6,35 +6,32 @@ using static System.Console;
 
 namespace StoreManage
 {
-    public class Customer
+    public class Customer 
     {
-        private string Id;
-        private string UserName;
-        private string PhoneNumber;
-        private string Address;
+        protected string Id;
+        protected string UserName;
+        protected string PhoneNumber;
+        protected string Address;
 
         public string GetId => Id;
-
         public string GetPhoneNumber => PhoneNumber;
-
         public string GetAddress => Address;
-
         public string GetUserName => UserName;
 
-        public void InputInfo()
+        public void Input() 
         {
             
-            Write("\tMã khách hàng: ");
+            Write("\t + Mã khách hàng: ");
             Id = ReadLine();
-            Write("\tTên khách hàng: ");
+            Write("\t + Tên khách hàng: ");
             UserName = ReadLine();
-            Write("\tĐịa chỉ: ");
+            Write("\t + Địa chỉ: ");
             Address = ReadLine();
-            Write("\tSố điện thoại: ");
+            Write("\t + Số điện thoại: ");
             PhoneNumber = ReadLine(); 
 
         }
-        public string PrintInfo()
+        public string Output()
         {
             string Output = "";
             Output += $"\tMã khách hàng             : {GetId}\n";
@@ -43,7 +40,11 @@ namespace StoreManage
             Output += $"\tSố điện thoại khách hàng  : {GetPhoneNumber}\n";
             return Output; 
         }
-      
+
+        public override string ToString()
+        {
+            return $"Thông tin khác hàng: < Mã: {GetId} > < Tên: {GetUserName} > < Địa chỉ: {GetAddress} > < Số điện thoại: {GetPhoneNumber}>";
+        }
 
     }
 }
