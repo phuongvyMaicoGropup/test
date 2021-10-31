@@ -1,4 +1,5 @@
-﻿using StoreManage.Services;
+﻿using StoreManage.DataStructure;
+using StoreManage.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,7 +26,7 @@ namespace StoreManage.Helpers
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("\t\tNhập sai định dạng (chỉ cho phép nhập số).Vui lòng nhập lại ! ");
+                    Console.WriteLine("\t\t\tNhập sai định dạng (chỉ cho phép nhập số).Vui lòng nhập lại ! ");
                     check = false;
                 }
             } while (value != 1 && value != 2 || check == false);
@@ -111,10 +112,49 @@ namespace StoreManage.Helpers
             {
                 Console.Write(content);
                 value = Console.ReadLine();
-                if (string.IsNullOrEmpty(value)) Console.WriteLine("Nội dung không được bổ trống. Vui lòng nhập lại. "); 
+                if (string.IsNullOrEmpty(value)) Console.WriteLine("\tNội dung không được bổ trống. Vui lòng nhập lại. "); 
             } while (string.IsNullOrEmpty(value));
         }
 
-        
+        public static void InputNumber(string content, ref string number)
+        {
+            bool check; 
+            do
+            {
+                check = true; 
+                Console.Write(content);
+                number = Console.ReadLine(); 
+                for (int i = 0; i<number.Length; i++)
+                {
+                    if (number[i] >='a' && number[i]<='z'|| number[i] >= 'A' && number[i] <= 'Z')
+                    {
+                        Console.WriteLine("\tChỉ được phép nhập số .Vui lòng thử lại. ");
+                        check = false; 
+                    }
+                }
+                if (check == true) break; 
+                 
+            } while (check==false);
+        }
+        public static void InputDate(string content, ref Date date )
+        {
+            do
+            {
+                Console.WriteLine(content);
+                AddQuantity("\t  + Nhập ngày  : ", ref date.Day);
+                AddQuantity("\t  + Nhập tháng : ", ref date.Month);
+                AddQuantity("\t  + Nhập năm   : ", ref date.Year);
+                if (date.Day > 31 || date.Month > 12 || date.Year < 1000)
+                {
+                    Console.WriteLine("\t => Ngày nhập không hợp lệ :");
+                    Console.WriteLine("\t\t + Ngày không quá 31 ngày");
+                    Console.WriteLine("\t\t + Tháng không quá 12 tháng");
+                    Console.WriteLine("\t\t + Năm không dưới 1000");
+
+                }
+            } while (date.Day > 31 || date.Month > 12 || date.Year < 1000);
+
+        }
+
     }
 }

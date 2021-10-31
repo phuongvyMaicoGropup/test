@@ -16,7 +16,7 @@ namespace StoreManage
 {
     public class Bill
     {
-        private List<BillDetail> Bills = new List<BillDetail>();
+        private List<BillDetail> _bills = new List<BillDetail>();
         private int _countBill;
         public int TotalBill => _countBill;
         
@@ -29,7 +29,7 @@ namespace StoreManage
             {
                 BillDetail bill = new BillDetail();
                 bill.Input(i);
-                Bills.Add(bill); 
+                _bills.Add(bill); 
             }
 
         }
@@ -39,7 +39,7 @@ namespace StoreManage
 
             StreamWriter sWriter = new StreamWriter(fs);
             int i = 0; 
-            foreach (var bill in Bills)
+            foreach (var bill in _bills)
             {
                 i++;
                 sWriter.WriteLine("\t**************************************************");
@@ -61,7 +61,10 @@ namespace StoreManage
                 for (int j = 0; j < bill.Products.Count; j++)
                 {
                     sWriter.WriteLine($"\tChi tiết hóa đơn thứ {j+1} " );
-                    sWriter.Write(bill.Products[j].SResult);
+                    foreach (var s in bill.Products[j].SResult)
+                    {
+                        sWriter.Write(s);
+                    }
                 }
                 sWriter.WriteLine();
                 sWriter.WriteLine("\t**************************************************");
@@ -75,7 +78,7 @@ namespace StoreManage
         public void PrintConsole()
         {
             int page = 0;
-            WriteLine("Danh sách các hóa đơn: "); 
+            WriteLine("\tDanh sách các hóa đơn: "); 
             for (int t = 1; t <= _countBill; t++)
             {
                 WriteLine($"\t {t}. Hiện hóa đơn thứ {t}."); 
@@ -93,30 +96,33 @@ namespace StoreManage
                 WriteLine("\t**************************************************");
                 WriteLine();
                 WriteLine($"\tThông tin hóa đơn thứ {page+1} : ");
-                WriteLine($"\t Mã hóa đơn : {Bills[page].Id}");
-                WriteLine($"\t Ngày lập   : {Bills[page].DateCreate.Day}/{Bills[page].DateCreate.Month}/{Bills[page].DateCreate.Year}");
-                WriteLine($"\t Tổng giá   : {Bills[page].TotalCost}");
+                WriteLine($"\t Mã hóa đơn : {_bills[page].Id}");
+                WriteLine($"\t Ngày lập   : {_bills[page].DateCreate.Day}/{_bills[page].DateCreate.Month}/{_bills[page].DateCreate.Year}");
+                WriteLine($"\t Tổng giá   : {_bills[page].TotalCost}");
                 WriteLine();
                 WriteLine("\t--------------------------------------------------");
                 WriteLine();
                 WriteLine($"\tThông tin khách hàng :");
-                WriteLine(Bills[page].Customer.Output());
+                WriteLine(_bills[page].Customer.Output());
                 WriteLine();
                 WriteLine($"\t--------------------------------------------------");
                 WriteLine();
                 WriteLine("\tDanh sách chi tiết các hóa đơn :");
                 WriteLine();
-                for (int j = 0; j < Bills[page].Products.Count; j++)
+                for (int j = 0; j < _bills[page].Products.Count; j++)
                 {
                     WriteLine($"\tChi tiết hóa đơn thứ {j + 1} ");
-                    Write(Bills[page].Products[j].SResult);
+                    foreach (var s in _bills[page].Products[j].SResult)
+                    {
+                        Write(s);
+                    }
                 }
                 WriteLine();
                 WriteLine("\t**************************************************");
-                input = Console.ReadKey();
+                input = ReadKey();
                 if (input.Key == ConsoleKey.RightArrow)
                 {
-                    if (page < Bills.Count-1) page++;
+                    if (page < _bills.Count-1) page++;
                     else page = 0; 
                 }
                 if (input.Key == ConsoleKey.LeftArrow)
@@ -124,7 +130,7 @@ namespace StoreManage
                     if (page > 0 ) page--;
                     else page = _countBill-1;
                 }
-                Console.Clear();
+                Clear();
             } while (input.Key != ConsoleKey.Enter);
 
         }

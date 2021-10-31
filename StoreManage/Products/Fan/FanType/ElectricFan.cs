@@ -11,7 +11,6 @@ namespace StoreManage.Products.Fan
     class ElectricFan : Fan
     {
         protected int _battery = 0;
-        public new string Name = "Quạt cắm sạc ";
         public int Battery => _battery; 
         public override void Input()
         {
@@ -24,9 +23,9 @@ namespace StoreManage.Products.Fan
 
         public override void Output()
         {
+            _name = "Quạt cắm sạc " + _name; 
             base.Output();
-            _sResult += $"\tDung lượng pin: {Battery}\n";
-            base.Output2();
+            _sResult.Insert(3,$"\tDung lượng pin: {Battery}\n");
         }
     }
 }

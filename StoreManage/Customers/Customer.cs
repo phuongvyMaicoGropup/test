@@ -24,7 +24,7 @@ namespace StoreManage
             Helper.InputCheck("\t + Mã khách hàng  : ", ref _id);
             Helper.InputCheck("\t + Tên khách hàng : ", ref _userName);
             Helper.InputCheck("\t + Địa chỉ        : ", ref _address);
-            Helper.InputCheck("\t + Số điện thoại  : ", ref _phoneNumber);
+            Helper.InputNumber("\t + Số điện thoại  : ", ref _phoneNumber);
         }
         public string Output()
         {
@@ -36,10 +36,7 @@ namespace StoreManage
             return Output; 
         }
 
-        public override string ToString()
-        {
-            return $"Thông tin khác hàng: < Mã: {Id} > < Tên: {UserName} > < Địa chỉ: {Address} > < Số điện thoại: {PhoneNumber}>";
-        }
+        
 
     }
 }

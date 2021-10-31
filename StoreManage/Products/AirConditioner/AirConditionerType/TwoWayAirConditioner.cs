@@ -11,7 +11,6 @@ namespace StoreManage.Products.AirConditioner
 {
     class TwoWayAirConditioner : AirConditioner
     {
-        public new string Name = "Máy lạnh hai chiều ";
 
         public override void Input()
         {
@@ -29,13 +28,14 @@ namespace StoreManage.Products.AirConditioner
 
         public override void Output()
         {
+            _name = "Máy lạnh hai chiều " + _name;
             base.Output();
+            int index = 3; 
             if (Inverter.Add == true ||Antibacterial.Add == true || Deodorization.Add == true)
-                 _sResult += "\tThêm công nghệ: \n";
-            if (Inverter.Add == true) _sResult += $"\t  +{Inverter.Name()} \n";
-            if (Antibacterial.Add == true) _sResult += $"\t  +{Antibacterial.Name()} \n";
-            if (Deodorization.Add == true) _sResult += $"\t  +{Deodorization.Name()} \n";
-            base.Output2();
+                 _sResult.Insert(index++,"\tThêm công nghệ: \n");
+            if (Inverter.Add == true) _sResult.Insert(index++, $"\t  +{Inverter.Name()} \n");
+            if (Antibacterial.Add == true) _sResult.Insert(index++,$"\t  +{Antibacterial.Name()} \n");
+            if (Deodorization.Add == true) _sResult.Insert(index++,$"\t  +{Deodorization.Name()} \n");
         }
 
         public override double _DefaultCost() => 2000; 

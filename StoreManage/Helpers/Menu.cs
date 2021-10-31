@@ -9,8 +9,10 @@ namespace StoreManage.Helpers
 {
     public class Menu
     {
-        public string Option;
-        public Bill _bill = new Bill();
+        protected string _option;
+        protected Bill _bill = new Bill();
+        public Bill Bill => _bill;
+        public string Option => _option; 
         public void Input()
         {
             do
@@ -25,10 +27,10 @@ namespace StoreManage.Helpers
                 Console.WriteLine();
                 Console.WriteLine("\t**************************");
                 Console.Write("\t=>Vui lòng nhập lựa chọn : ");
-                Option = Console.ReadLine();
-                if (Option == "1" || Option == "2" || Option == "3" || Option == "4") UI.Clear();
+                _option = Console.ReadLine();
+                if (_option == "1" || _option == "2" || _option == "3" || _option == "4") UI.Clear();
 
-                switch (Option)
+                switch (_option)
                 {
                     case "1":
                         _bill.Input();
@@ -63,7 +65,7 @@ namespace StoreManage.Helpers
 
                 }
 
-            } while ( Option != "4" );
+            } while (_option != "4" );
         }
     }
 }

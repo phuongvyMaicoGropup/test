@@ -9,7 +9,7 @@ namespace StoreManage.Products.Fan
 {
     class DefaultFan : Fan
     {
-        public new string Name = "Quạt đứng ";
+        
         public override void Input()
         {
             base.Input();
@@ -20,8 +20,8 @@ namespace StoreManage.Products.Fan
 
         public override void Output()
         {
+            _name = "Quạt đứng " + _name; 
             base.Output();
-            base.Output2();
         }
 
     }

@@ -10,13 +10,12 @@ namespace StoreManage.Products.Fan
 {
     class SteamFan : Fan
     {
-        int Volume = 0;
-        public new string Name = "Quạt hơi nước ";
-
+        private int _volume = 0;
+        public int Volume => _volume; 
         public override void Input()
         {
             base.Input();
-            Helper.AddQuantity("\t\t\tNhập dung tích nước (lít) : ", ref Volume);
+            Helper.AddQuantity("\t\t\tNhập dung tích nước (lít) : ", ref _volume);
             Helper.AddQuantity("\t\t\tSố lượng hàng bán : ", ref _amount); 
         }
 
@@ -24,9 +23,9 @@ namespace StoreManage.Products.Fan
 
         public override void Output()
         {
+            _name = "Quạt hơi nước " + _name; 
             base.Output();
-            _sResult += $"\tDung tích nước: {Volume}\n";
-            base.Output2();
+            _sResult.Insert(3,$"\tDung tích nước: {Volume}\n");
         }
     }
 }

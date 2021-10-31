@@ -13,8 +13,8 @@ namespace StoreManage.Products
         protected string _name;
         protected string _provider;
         protected int _amount;
-        protected string _sResult ="";
-        public string SResult => _sResult;
+        protected List<string> _sResult = new List<string>();
+        public List<string> SResult => _sResult;
         public int Amount => _amount;
         public string Provider => _provider;
         public string Id => _id;
@@ -32,22 +32,16 @@ namespace StoreManage.Products
         public abstract double Price();
         public virtual void Output()
         {
-            _sResult =  $"\tMã số sản phẩm  : {Id}\n";
-            _sResult += $"\tTên sản phẩm    : {Name}\n";
-            _sResult += $"\tNơi sản xuất    : {Provider}\n";
+            _sResult.Add($"\tMã số sản phẩm  : {Id}\n");
+            _sResult.Add($"\tTên sản phẩm    : {Name}\n");
+            _sResult.Add($"\tNơi sản xuất    : {Provider}\n");
+            _sResult.Add($"\tĐơn giá         : {Price()} \n");
+            _sResult.Add($"\tSố sản phẩm bán : {Amount}\n");
+            _sResult.Add($"\tTổng tiền đơn   : {Amount * Price()}\n");
+            _sResult.Add("\t--------------------------------------------------\n");
         }
-        public virtual void Output2()
-        {
-            _sResult += $"\tĐơn giá         : {Price()} \n";
-            _sResult += $"\tSố sản phẩm bán : {Amount}\n";
-            _sResult += $"\tTổng tiền đơn   : {Amount * Price()}\n";
-            _sResult += "\t--------------------------------------------------\n";
-        }
-
       
-        public void ToString(string[] k, int line)
-        {
-            throw new NotImplementedException();
-        }
+      
+       
     }
 }
