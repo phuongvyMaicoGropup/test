@@ -17,15 +17,15 @@ namespace StoreManage
     public class Bill
     {
         private List<BillDetail> Bills = new List<BillDetail>();
-        private int CountBill;
-        public int GetTotalBill => CountBill;
+        private int _countBill;
+        public int TotalBill => _countBill;
         
 
         public void Input()
         {
-            Helper.AddQuantity("\tSố lượng hóa đơn muốn nhập : ", ref CountBill);
-            Console.WriteLine(); 
-            for (int i = 0; i< CountBill; i++)
+            Helper.AddQuantity("\tSố lượng hóa đơn muốn nhập : ", ref _countBill);
+            WriteLine(); 
+            for (int i = 0; i< _countBill; i++)
             {
                 BillDetail bill = new BillDetail();
                 bill.Input(i);
@@ -45,23 +45,23 @@ namespace StoreManage
                 sWriter.WriteLine("\t**************************************************");
                 sWriter.WriteLine();
                 sWriter.WriteLine($"\tThông tin hóa đơn thứ {i} : ");
-                sWriter.WriteLine($"\t Mã hóa đơn : {bill.GetId}");
-                sWriter.WriteLine($"\t Ngày lập   : {bill.GetDateCreate.Day}/{bill.GetDateCreate.Month}/{bill.GetDateCreate.Year}");
-                sWriter.WriteLine($"\t Tổng giá   : {bill.GetTotalCost}");
+                sWriter.WriteLine($"\t Mã hóa đơn : {bill.Id}");
+                sWriter.WriteLine($"\t Ngày lập   : {bill.DateCreate.Day}/{bill.DateCreate.Month}/{bill.DateCreate.Year}");
+                sWriter.WriteLine($"\t Tổng giá   : {bill.TotalCost}");
                 sWriter.WriteLine();
                 sWriter.WriteLine("\t--------------------------------------------------");
                 sWriter.WriteLine();
                 sWriter.WriteLine($"\tThông tin khách hàng :");
-                sWriter.WriteLine(bill.GetCustomer.Output());
+                sWriter.WriteLine(bill.Customer.Output());
                 sWriter.WriteLine();
                 sWriter.WriteLine($"\t--------------------------------------------------");
                 sWriter.WriteLine();
                 sWriter.WriteLine("\tDanh sách chi tiết các hóa đơn :");
                 sWriter.WriteLine();
-                for (int j = 0; j < bill.GetProducts.Count; j++)
+                for (int j = 0; j < bill.Products.Count; j++)
                 {
                     sWriter.WriteLine($"\tChi tiết hóa đơn thứ {j+1} " );
-                    sWriter.Write(bill.GetProducts[j].GetSResult);
+                    sWriter.Write(bill.Products[j].SResult);
                 }
                 sWriter.WriteLine();
                 sWriter.WriteLine("\t**************************************************");
@@ -74,8 +74,13 @@ namespace StoreManage
         }
         public void PrintConsole()
         {
-            int page = 0; 
-            Write($"\tNhập thứ tự hóa đơn muốn xem hiện tại (yêu cầu : 0 < số thứ tự < {CountBill+1} ): ");
+            int page = 0;
+            WriteLine("Danh sách các hóa đơn: "); 
+            for (int t = 1; t <= _countBill; t++)
+            {
+                WriteLine($"\t {t}. Hiện hóa đơn thứ {t}."); 
+            }
+            Write($"\tNhập thứ tự hóa đơn muốn xem hiện tại : ");
             page = Convert.ToInt32(ReadLine());
 
             var input = Console.ReadKey();
@@ -88,23 +93,23 @@ namespace StoreManage
                 WriteLine("\t**************************************************");
                 WriteLine();
                 WriteLine($"\tThông tin hóa đơn thứ {page+1} : ");
-                WriteLine($"\t Mã hóa đơn : {Bills[page].GetId}");
-                WriteLine($"\t Ngày lập   : {Bills[page].GetDateCreate.Day}/{Bills[page].GetDateCreate.Month}/{Bills[page].GetDateCreate.Year}");
-                WriteLine($"\t Tổng giá   : {Bills[page].GetTotalCost}");
+                WriteLine($"\t Mã hóa đơn : {Bills[page].Id}");
+                WriteLine($"\t Ngày lập   : {Bills[page].DateCreate.Day}/{Bills[page].DateCreate.Month}/{Bills[page].DateCreate.Year}");
+                WriteLine($"\t Tổng giá   : {Bills[page].TotalCost}");
                 WriteLine();
                 WriteLine("\t--------------------------------------------------");
                 WriteLine();
                 WriteLine($"\tThông tin khách hàng :");
-                WriteLine(Bills[page].GetCustomer.Output());
+                WriteLine(Bills[page].Customer.Output());
                 WriteLine();
                 WriteLine($"\t--------------------------------------------------");
                 WriteLine();
                 WriteLine("\tDanh sách chi tiết các hóa đơn :");
                 WriteLine();
-                for (int j = 0; j < Bills[page].GetProducts.Count; j++)
+                for (int j = 0; j < Bills[page].Products.Count; j++)
                 {
                     WriteLine($"\tChi tiết hóa đơn thứ {j + 1} ");
-                    Write(Bills[page].GetProducts[j].GetSResult);
+                    Write(Bills[page].Products[j].SResult);
                 }
                 WriteLine();
                 WriteLine("\t**************************************************");
@@ -117,7 +122,7 @@ namespace StoreManage
                 if (input.Key == ConsoleKey.LeftArrow)
                 {
                     if (page > 0 ) page--;
-                    else page = CountBill-1;
+                    else page = _countBill-1;
                 }
                 Console.Clear();
             } while (input.Key != ConsoleKey.Enter);

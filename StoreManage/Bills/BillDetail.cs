@@ -15,37 +15,43 @@ namespace StoreManage.Bills
 {
     class BillDetail
     {
-        private Customer Customer = new Customer();
-        private string Id;
-        private Date Created = new Date();
-        private double Cost;
-        private List<Product> Products = new List<Product>();
-        private int Count;
+        private Customer _customer = new Customer();
+        private string _id;
+        private Date _created = new Date();
+        private double _cost;
+        private List<Product> _products = new List<Product>();
+        private int _count;
 
-        public Date GetDateCreate => Created;
-        public string GetId => Id;
-        public double GetTotalCost => Cost;
-        public List<Product> GetProducts => Products;
-        public Customer GetCustomer => Customer;
-        Product product;
+        public Date DateCreate => _created;
+        public string Id => _id;
+        public double TotalCost => _cost;
+        public List<Product> Products => _products;
+        public Customer Customer => _customer;
+        public Product product;
         public void Input(int index)
         {
             WriteLine($"\tNhập chi tiết hóa đơn thứ {index+1}: ");
-            Write("\t - Mã hóa đơn:");
-            Id = ReadLine();
+            Helper.InputCheck("\t - Mã hóa đơn:",ref _id);
 
-            WriteLine("\t - Ngày lập hóa đơn: ");
-            Helper.AddQuantity("\t  + Nhập ngày  : ", ref Created.Day);
-            Helper.AddQuantity("\t  + Nhập tháng : ", ref Created.Month);
-            Helper.AddQuantity("\t  + Nhập năm   : ", ref Created.Year);
+            do
+            {
+                WriteLine("\t - Ngày lập hóa đơn: ");
+                Helper.AddQuantity("\t  + Nhập ngày  : ", ref _created.Day);
+                Helper.AddQuantity("\t  + Nhập tháng : ", ref _created.Month);
+                Helper.AddQuantity("\t  + Nhập năm   : ", ref _created.Year);
+                if (_created.Day > 31 || _created.Month > 12 || _created.Year < 1900)
+                {
+                    WriteLine("\t => Ngày nhập không hợp lệ : (ngày <=31 , tháng < 12 , năm > 1900 )");
+                }
+            } while (_created.Day > 31 || _created.Month > 12 || _created.Year < 1900); 
 
             WriteLine(); 
             WriteLine("\t - Thông tin khách hàng:");
             Customer.Input();
 
             int Answer = -1;
-            Helper.AddQuantity("\t - Nhập số lượng chi tiết trong danh sách cac chi tiết hóa đơn : ", ref Count);
-            for (int i = 0; i < Count; i++)
+            Helper.AddQuantity("\t - Nhập số lượng chi tiết trong danh sách cac chi tiết hóa đơn : ", ref _count);
+            for (int i = 0; i < _count; i++)
             {
                 Helper.ChooseTwoOption(1, 2, "\t\tChọn loại thiết bị điện (1-máy quạt, 2- máy lạnh):", ref Answer);
                 if (Answer == 1)
@@ -86,7 +92,7 @@ namespace StoreManage.Bills
 
                 }
                 product.Input();
-                Cost += product.Price() * product.GetAmount;
+                _cost += product.Price() * product.Amount;
                 product.Output();
                 Products.Add(product);
             }

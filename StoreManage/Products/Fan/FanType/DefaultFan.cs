@@ -13,7 +13,7 @@ namespace StoreManage.Products.Fan
         public override void Input()
         {
             base.Input();
-            Helper.AddQuantity("\t\t\tNhập số lượng hàng : ", ref Amount);
+            Helper.AddQuantity("\t\t\tNhập số lượng hàng : ", ref _amount);
         }
 
         public override double Price() => 500;

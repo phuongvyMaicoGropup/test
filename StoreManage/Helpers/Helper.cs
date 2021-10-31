@@ -10,6 +10,7 @@ namespace StoreManage.Helpers
 {
     public static class Helper
     {
+        // Helper.AddService(_Antibacterial);
         public static void AddService(Service service)
         {
             bool check;
@@ -19,7 +20,7 @@ namespace StoreManage.Helpers
                 try
                 {
                     check = true;
-                    Console.Write($"\t\t\tThêm {service.Name()} ( Không sử dụng - 0 , Có sử dụng - 1  ): ");
+                    Console.Write($"\t\t\tThêm {service.Name()} ( Không sử dụng - 1 , Có sử dụng - 2  ): ");
                     value = Convert.ToInt32(Console.ReadLine());
                 }
                 catch (Exception)
@@ -27,9 +28,12 @@ namespace StoreManage.Helpers
                     Console.WriteLine("\t\tNhập sai định dạng (chỉ cho phép nhập số).Vui lòng nhập lại ! ");
                     check = false;
                 }
-            } while (value != 0 && value != 1 || check == false);
-            if (value == 1) service.Add = true; 
+            } while (value != 1 && value != 2 || check == false);
+            if (value == 2) service.Add = true; 
         }
+
+        //Helper.AddQuantity("\t - Nhập số lượng chi tiết trong danh sách cac chi tiết hóa đơn : ", ref _count);
+
         public static void AddQuantity(string content, ref int value)
         {
             bool check;
@@ -53,6 +57,8 @@ namespace StoreManage.Helpers
                 }
             } while (check == false);
         }
+
+        //Helper.ChooseTwoOption(1, 2, "\t\tChọn loại thiết bị điện (1-máy quạt, 2- máy lạnh):", ref Answer);
         public static void ChooseTwoOption(int Option1, int Option2,string Question, ref int Answer)
         {
             bool check; 
@@ -73,6 +79,8 @@ namespace StoreManage.Helpers
                 }
             } while (Answer != Option1 && Answer != Option2|| check == false);
         }
+
+         // Helper.ChooseThreeOption(1, 2, 3, "\t\t + Chọn loại máy quạt (1-máy quạt đứng,2- máy quạt hơi nước,3 – máy quạt sạc điện): ", ref TypeOfFan);
         public static void ChooseThreeOption(int Option1, int Option2, int Option3, string Question, ref int Answer)
         {
             bool check;
@@ -94,6 +102,17 @@ namespace StoreManage.Helpers
                     check = false;
                 }
             } while (Answer != Option1 && Answer != Option2 && Answer != Option3 || check == false);
+        }
+        // Helper.InputCheck("\t\t\tNhập mã : ",ref _id);
+        public static void InputCheck(string content , ref string value)
+        {
+            value = "";
+            do
+            {
+                Console.Write(content);
+                value = Console.ReadLine();
+                if (string.IsNullOrEmpty(value)) Console.WriteLine("Nội dung không được bổ trống. Vui lòng nhập lại. "); 
+            } while (string.IsNullOrEmpty(value));
         }
 
         

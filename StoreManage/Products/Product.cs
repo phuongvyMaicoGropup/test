@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreManage.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,42 +9,39 @@ namespace StoreManage.Products
 {
     public abstract class Product 
     {
-        protected string Id;
-        protected string Name;
-        protected string Provider;
-        protected int Amount;
-        protected string SResult ="";
-        public string GetSResult => SResult;
-        public int GetAmount => Amount;
-        public string GetProvider => Provider;
-        public string GetId => Id;
-        public string GetName => Name; 
+        protected string _id;
+        protected string _name;
+        protected string _provider;
+        protected int _amount;
+        protected string _sResult ="";
+        public string SResult => _sResult;
+        public int Amount => _amount;
+        public string Provider => _provider;
+        public string Id => _id;
+        public string Name => _name; 
 
 
         public virtual void Input()
         {
-            Write("\t\t\tNhập mã : ");
-            Id = ReadLine();
-            Write("\t\t\tTên sản phẩm: ");
-            Name =  ReadLine();
-            Write("\t\t\tNơi sản xuất: ");
-            Provider = ReadLine(); 
+            Helper.InputCheck("\t\t\tNhập mã : ",ref _id);
+            Helper.InputCheck("\t\t\tTên sản phẩm: ",ref _name);
+            Helper.InputCheck("\t\t\tNơi sản xuất: ", ref _provider);
         }
 
 
         public abstract double Price();
         public virtual void Output()
         {
-            SResult =  $"\tMã số sản phẩm  : {Id}\n";
-            SResult += $"\tTên sản phẩm    : {Name}\n";
-            SResult += $"\tNơi sản xuất    : {Provider}\n";
+            _sResult =  $"\tMã số sản phẩm  : {Id}\n";
+            _sResult += $"\tTên sản phẩm    : {Name}\n";
+            _sResult += $"\tNơi sản xuất    : {Provider}\n";
         }
         public virtual void Output2()
         {
-            SResult += $"\tĐơn giá         : {Price()} \n";
-            SResult += $"\tSố sản phẩm bán : {Amount}\n";
-            SResult += $"\tTổng tiền đơn   : {Amount * Price()}\n";
-            SResult += "\t--------------------------------------------------\n";
+            _sResult += $"\tĐơn giá         : {Price()} \n";
+            _sResult += $"\tSố sản phẩm bán : {Amount}\n";
+            _sResult += $"\tTổng tiền đơn   : {Amount * Price()}\n";
+            _sResult += "\t--------------------------------------------------\n";
         }
 
       

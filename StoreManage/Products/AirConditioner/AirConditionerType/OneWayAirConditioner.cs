@@ -12,26 +12,27 @@ namespace StoreManage.Products.AirConditioner
 {
     class OneWayAirConditioner : AirConditioner
     {
+
         public new string Name = "Máy lạnh một chiều "; 
         public override void Input()
         {
             base.Input();
-            Helper.AddQuantity("\t\t\tNhập số lượng hàng : ", ref Amount); 
+            Helper.AddQuantity("\t\t\tNhập số lượng hàng : ", ref _amount); 
         }
 
-        public override double Price() => _DefaultCost + _Inverter.Cost();
+        public override double Price() => _DefaultCost() + Inverter.Cost();
 
         public override void Output()
         {
             base.Output();
-            if (_Inverter.Add == true)
+            if (Inverter.Add == true)
             {
-                SResult += "\tThêm công nghệ : \n";
-                SResult += $"\t  +{_Inverter.Name()} \n";
+                _sResult += "\tThêm công nghệ : \n";
+                _sResult += $"\t  +{Inverter.Name()} \n";
             }
             base.Output2();
         }
 
-
+        public override double _DefaultCost() => 1000; 
     }
 }

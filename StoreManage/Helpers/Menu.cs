@@ -10,7 +10,7 @@ namespace StoreManage.Helpers
     public class Menu
     {
         public string Option;
-        private Bill _Bill = new Bill();
+        public Bill _bill = new Bill();
         public void Input()
         {
             do
@@ -31,15 +31,25 @@ namespace StoreManage.Helpers
                 switch (Option)
                 {
                     case "1":
-                        _Bill.Input();
+                        _bill.Input();
 
                         UI.Clear(); 
                         break;
                     case "2":
-                        _Bill.PrintConsole();
+                        if (_bill.TotalBill == 0)
+                        {
+                            Console.WriteLine("\tChưa nhập hóa đơn. Vui lòng nhập lựa chọn khác!");
+                            break;
+                        }
+                        _bill.PrintConsole();
                         break;
                     case "3":
-                        _Bill.PrintTxt();
+                        if (_bill.TotalBill == 0)
+                        {
+                            Console.WriteLine("\tChưa nhập hóa đơn. Vui lòng nhập lựa chọn khác!");
+                            break;
+                        }
+                        _bill.PrintTxt();
                         Console.WriteLine("\t->Đã xuất hóa đơn tại : " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\danh_sach_hoa_don.txt");
                         
                         UI.Clear();

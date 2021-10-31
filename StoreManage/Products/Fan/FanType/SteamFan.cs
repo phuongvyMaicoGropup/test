@@ -17,7 +17,7 @@ namespace StoreManage.Products.Fan
         {
             base.Input();
             Helper.AddQuantity("\t\t\tNhập dung tích nước (lít) : ", ref Volume);
-            Helper.AddQuantity("\t\t\tSố lượng hàng bán : ", ref Amount); 
+            Helper.AddQuantity("\t\t\tSố lượng hàng bán : ", ref _amount); 
         }
 
         public override double Price() => Volume * 400;
@@ -25,7 +25,7 @@ namespace StoreManage.Products.Fan
         public override void Output()
         {
             base.Output();
-            SResult += $"\tDung tích nước: {Volume}\n";
+            _sResult += $"\tDung tích nước: {Volume}\n";
             base.Output2();
         }
     }

@@ -10,14 +10,14 @@ namespace StoreManage.Products.AirConditioner
 {
     abstract class AirConditioner : Product
     {
-        public InverterService _Inverter = new InverterService();
-        public AntibacterialService _Antibacterial = new AntibacterialService();
-        public DeodorizationService _Deodorization = new DeodorizationService();
-        public double _DefaultCost = 1000; 
+        public InverterService Inverter = new InverterService();
+        public AntibacterialService Antibacterial = new AntibacterialService();
+        public DeodorizationService Deodorization = new DeodorizationService();
+        public abstract double _DefaultCost(); 
         public override void Input()
         {
             base.Input();
-            Helper.AddService(_Inverter);
+            Helper.AddService(Inverter);
 
         }
         

@@ -2,48 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static System.Console; 
+using static System.Console;
+using StoreManage.Helpers; 
 
 namespace StoreManage
 {
     public class Customer 
     {
-        protected string Id;
-        protected string UserName;
-        protected string PhoneNumber;
-        protected string Address;
+        protected string _id;
+        protected string _userName;
+        protected string _phoneNumber;
+        protected string _address;
 
-        public string GetId => Id;
-        public string GetPhoneNumber => PhoneNumber;
-        public string GetAddress => Address;
-        public string GetUserName => UserName;
+        public string Id => _id;
+        public string PhoneNumber => _phoneNumber;
+        public string Address => _address;
+        public string UserName => _userName;
 
         public void Input() 
         {
-            
-            Write("\t + Mã khách hàng: ");
-            Id = ReadLine();
-            Write("\t + Tên khách hàng: ");
-            UserName = ReadLine();
-            Write("\t + Địa chỉ: ");
-            Address = ReadLine();
-            Write("\t + Số điện thoại: ");
-            PhoneNumber = ReadLine(); 
-
+            Helper.InputCheck("\t + Mã khách hàng  : ", ref _id);
+            Helper.InputCheck("\t + Tên khách hàng : ", ref _userName);
+            Helper.InputCheck("\t + Địa chỉ        : ", ref _address);
+            Helper.InputCheck("\t + Số điện thoại  : ", ref _phoneNumber);
         }
         public string Output()
         {
             string Output = "";
-            Output += $"\tMã khách hàng             : {GetId}\n";
-            Output += $"\tTên khách hàng            : {GetUserName}\n";
-            Output += $"\tĐịa chỉ khách hàng        : {GetAddress}\n";
-            Output += $"\tSố điện thoại khách hàng  : {GetPhoneNumber}\n";
+            Output += $"\tMã khách hàng             : {Id}\n";
+            Output += $"\tTên khách hàng            : {UserName}\n";
+            Output += $"\tĐịa chỉ khách hàng        : {Address}\n";
+            Output += $"\tSố điện thoại khách hàng  : {PhoneNumber}\n";
             return Output; 
         }
 
         public override string ToString()
         {
-            return $"Thông tin khác hàng: < Mã: {GetId} > < Tên: {GetUserName} > < Địa chỉ: {GetAddress} > < Số điện thoại: {GetPhoneNumber}>";
+            return $"Thông tin khác hàng: < Mã: {Id} > < Tên: {UserName} > < Địa chỉ: {Address} > < Số điện thoại: {PhoneNumber}>";
         }
 
     }
