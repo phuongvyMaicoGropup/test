@@ -115,7 +115,7 @@ namespace StoreManage.Helpers
                 if (string.IsNullOrEmpty(value)) Console.WriteLine("\tNội dung không được bổ trống. Vui lòng nhập lại. "); 
             } while (string.IsNullOrEmpty(value));
         }
-
+        //Helper.InputNumber("\t + Số điện thoại  : ", ref _phoneNumber);
         public static void InputNumber(string content, ref string number)
         {
             bool check; 
@@ -136,6 +136,8 @@ namespace StoreManage.Helpers
                  
             } while (check==false);
         }
+
+        //Helper.InputDate("\t - Ngày lập hóa đơn: ", ref _created);
         public static void InputDate(string content, ref Date date )
         {
             do
