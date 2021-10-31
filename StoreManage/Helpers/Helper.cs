@@ -129,7 +129,8 @@ namespace StoreManage.Helpers
                     if (number[i] >='a' && number[i]<='z'|| number[i] >= 'A' && number[i] <= 'Z')
                     {
                         Console.WriteLine("\tChỉ được phép nhập số .Vui lòng thử lại. ");
-                        check = false; 
+                        check = false;
+                        break; 
                     }
                 }
                 if (check == true) break; 
@@ -143,18 +144,23 @@ namespace StoreManage.Helpers
             do
             {
                 Console.WriteLine(content);
-                AddQuantity("\t  + Nhập ngày  : ", ref date.Day);
-                AddQuantity("\t  + Nhập tháng : ", ref date.Month);
-                AddQuantity("\t  + Nhập năm   : ", ref date.Year);
-                if (date.Day > 31 || date.Month > 12 || date.Year < 1000)
+                do
                 {
-                    Console.WriteLine("\t => Ngày nhập không hợp lệ :");
-                    Console.WriteLine("\t\t + Ngày không quá 31 ngày");
-                    Console.WriteLine("\t\t + Tháng không quá 12 tháng");
-                    Console.WriteLine("\t\t + Năm không dưới 1000");
-
-                }
-            } while (date.Day > 31 || date.Month > 12 || date.Year < 1000);
+                    AddQuantity("\t  + Nhập ngày  : ", ref date.Day);
+                    if (date.Day > 31) Console.WriteLine("\t=> Ngày không quá 31 ngày. Vui lòng nhập lại. ");
+                } while (date.Day > 31);
+                do
+                {
+                    AddQuantity("\t  + Nhập tháng : ", ref date.Month);
+                    if (date.Month > 12) Console.WriteLine("\t=> Tháng không quá 12 tháng. Vui lòng nhập lại. ");
+                } while (date.Month > 12);
+                do
+                {
+                    AddQuantity("\t  + Nhập năm   : ", ref date.Year);
+                    if (date.Year < 1000) Console.WriteLine("\t=> Năm không dưới 1000. Vui lòng nhập lại. ");
+                } while (date.Year <1000);
+                if (date.Day >= 29 && date.Month == 2) Console.WriteLine("\tTháng 2 chỉ có 28 ngày. Vui lòng nhập lại. ");
+            } while (date.Day >= 29 && date.Month == 2);
 
         }
 

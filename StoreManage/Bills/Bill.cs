@@ -19,7 +19,7 @@ namespace StoreManage
         private List<BillDetail> _bills = new List<BillDetail>();
         private int _countBill;
         public int TotalBill => _countBill;
-        
+        public bool IsCheckData = false; 
 
         public void Input()
         {
@@ -60,7 +60,8 @@ namespace StoreManage
                 sWriter.WriteLine();
                 for (int j = 0; j < bill.Products.Count; j++)
                 {
-                    sWriter.WriteLine($"\tChi tiết hóa đơn thứ {j+1} " );
+                    sWriter.WriteLine($"\tChi tiết sản phẩm thứ {j+1} " );
+                    sWriter.WriteLine(); 
                     foreach (var s in bill.Products[j].SResult)
                     {
                         sWriter.Write(s);
@@ -78,15 +79,26 @@ namespace StoreManage
         public void PrintConsole()
         {
             int page = 0;
-            WriteLine("\tDanh sách các hóa đơn: "); 
-            for (int t = 1; t <= _countBill; t++)
+            if (IsCheckData == false)
             {
-                WriteLine($"\t {t}. Hiện hóa đơn thứ {t}."); 
+                WriteLine("\tDanh sách các hóa đơn: ");
+                for (int t = 1; t <= _bills.Count; t++)
+                {
+                    WriteLine($"\t {t}. Hiện hóa đơn thứ {t}.");
+                }
+                IsCheckData = true; 
             }
-            Write($"\tNhập thứ tự hóa đơn muốn xem hiện tại : ");
-            page = Convert.ToInt32(ReadLine());
+            do
+            {
 
+                Write($"\tNhập thứ tự hóa đơn muốn xem hiện tại : ");
+                page = Convert.ToInt32(ReadLine());
+                if (page < 1 || page > _bills.Count)
+                    WriteLine("\tHóa đơn không tồn tại. Vui lòng nhập lại. ");
+            } while (page < 1 || page > _bills.Count);
+            WriteLine($"\tNhấn phím bất kỳ để tiếp tục."); 
             var input = Console.ReadKey();
+            Clear(); 
             page--; 
 
             do
@@ -111,7 +123,8 @@ namespace StoreManage
                 WriteLine();
                 for (int j = 0; j < _bills[page].Products.Count; j++)
                 {
-                    WriteLine($"\tChi tiết hóa đơn thứ {j + 1} ");
+                    WriteLine($"\tChi tiết sản phẩm thứ {j + 1} ");
+                    WriteLine();
                     foreach (var s in _bills[page].Products[j].SResult)
                     {
                         Write(s);
@@ -128,7 +141,7 @@ namespace StoreManage
                 if (input.Key == ConsoleKey.LeftArrow)
                 {
                     if (page > 0 ) page--;
-                    else page = _countBill-1;
+                    else page = _bills.Count - 1;
                 }
                 Clear();
             } while (input.Key != ConsoleKey.Enter);

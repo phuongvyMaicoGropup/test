@@ -23,9 +23,11 @@ namespace StoreManage.Products.Fan
 
         public override void Output()
         {
-            _name = "Quạt cắm sạc " + _name; 
             base.Output();
-            _sResult.Insert(3,$"\tDung lượng pin: {Battery}\n");
+            _sResult.Insert(3, $"\tThông số kĩ thuật: {Battery}\n");
+            _sResult.Insert(4,$"\t + Dung lượng pin: {Battery}\n");
         }
+
+        public override string TypeProduct() => "Quạt cắm sạc";
     }
 }

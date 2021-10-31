@@ -31,8 +31,8 @@ namespace StoreManage.Bills
         public void Input(int index)
         {
             WriteLine($"\tNhập chi tiết hóa đơn thứ {index+1}: ");
-            Helper.InputCheck("\t - Mã hóa đơn:",ref _id);
-            Helper.InputDate("\t - Ngày lập hóa đơn: ", ref _created);
+            Helper.InputCheck("\t - Mã hóa đơn          : ",ref _id);
+            Helper.InputDate("\t - Ngày lập hóa đơn    : ", ref _created);
             WriteLine(); 
             WriteLine("\t - Thông tin khách hàng:");
             Customer.Input();

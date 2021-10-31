@@ -30,14 +30,15 @@ namespace StoreManage.Products
 
 
         public abstract double Price();
+        public abstract string TypeProduct();
         public virtual void Output()
         {
-            _sResult.Add($"\tMã số sản phẩm  : {Id}\n");
-            _sResult.Add($"\tTên sản phẩm    : {Name}\n");
-            _sResult.Add($"\tNơi sản xuất    : {Provider}\n");
-            _sResult.Add($"\tĐơn giá         : {Price()} \n");
-            _sResult.Add($"\tSố sản phẩm bán : {Amount}\n");
-            _sResult.Add($"\tTổng tiền đơn   : {Amount * Price()}\n");
+            _sResult.Add($"\tMã số sản phẩm   : {Id}\n");
+            _sResult.Add($"\tTên sản phẩm     : {Name}\n");
+            _sResult.Add($"\tNơi sản xuất     : {Provider}\n");
+            _sResult.Add($"\tĐơn giá          : {Price()} \n");
+            _sResult.Add($"\tSố sản phẩm bán  : {Amount}\n");
+            _sResult.Add($"\tTổng tiền đơn    : {Amount * Price()}\n");
             _sResult.Add("\t--------------------------------------------------\n");
         }
       

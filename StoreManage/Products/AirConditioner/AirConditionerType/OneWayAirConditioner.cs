@@ -24,7 +24,6 @@ namespace StoreManage.Products.AirConditioner
         public override void Output()
         {
             base.Output();
-            _name = "Máy lạnh một chiều " + _name; 
             if (Inverter.Add == true)
             {
                 _sResult.Insert(3,"\tThêm công nghệ : \n");
@@ -32,6 +31,8 @@ namespace StoreManage.Products.AirConditioner
             }
         }
 
-        public override double _DefaultCost() => 1000; 
+        public override double _DefaultCost() => 1000;
+
+        public override string TypeProduct() => "Máy lạnh một chiều";
     }
 }

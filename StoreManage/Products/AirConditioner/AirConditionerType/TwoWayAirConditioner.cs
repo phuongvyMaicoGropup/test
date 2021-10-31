@@ -28,7 +28,6 @@ namespace StoreManage.Products.AirConditioner
 
         public override void Output()
         {
-            _name = "Máy lạnh hai chiều " + _name;
             base.Output();
             int index = 3; 
             if (Inverter.Add == true ||Antibacterial.Add == true || Deodorization.Add == true)
@@ -38,6 +37,8 @@ namespace StoreManage.Products.AirConditioner
             if (Deodorization.Add == true) _sResult.Insert(index++,$"\t  +{Deodorization.Name()} \n");
         }
 
-        public override double _DefaultCost() => 2000; 
+        public override double _DefaultCost() => 2000;
+
+        public override string TypeProduct() => "Máy lạnh hai chiều";
     }
 }

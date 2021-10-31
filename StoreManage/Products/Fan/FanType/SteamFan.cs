@@ -23,9 +23,10 @@ namespace StoreManage.Products.Fan
 
         public override void Output()
         {
-            _name = "Quạt hơi nước " + _name; 
-            base.Output();
-            _sResult.Insert(3,$"\tDung tích nước: {Volume}\n");
+            base.Output();     
+            _sResult.Insert(3,$"\tDung tích nước  : {Volume}\n");
         }
+
+        public override string TypeProduct() => "Quạt hơi nước";
     }
 }

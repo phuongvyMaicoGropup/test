@@ -20,9 +20,9 @@ namespace StoreManage.Products.Fan
 
         public override void Output()
         {
-            _name = "Quạt đứng " + _name; 
             base.Output();
         }
 
+        public override string TypeProduct() => "Quạt đứng";
     }
 }
