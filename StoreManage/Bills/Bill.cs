@@ -19,7 +19,6 @@ namespace StoreManage
         private List<BillDetail> _bills = new List<BillDetail>();
         private int _countBill;
         public int TotalBill => _countBill;
-        public bool IsCheckData = false; 
 
         public void Input()
         {
@@ -79,15 +78,13 @@ namespace StoreManage
         public void PrintConsole()
         {
             int page = 0;
-            if (IsCheckData == false)
+
+            WriteLine("\tDanh sách các hóa đơn: ");
+            for (int t = 1; t <= _bills.Count; t++)
             {
-                WriteLine("\tDanh sách các hóa đơn: ");
-                for (int t = 1; t <= _bills.Count; t++)
-                {
-                    WriteLine($"\t {t}. Hiện hóa đơn thứ {t}.");
-                }
-                IsCheckData = true; 
+                WriteLine($"\t {t}. Hiện hóa đơn thứ {t}.");
             }
+
             do
             {
 
@@ -103,7 +100,7 @@ namespace StoreManage
 
             do
             {
-                WriteLine("\tSử dụng mũi tên trái phải để chuyển qua lại giữa các hóa đơn. Enter để kết thúc. ");
+                WriteLine("\tSử dụng mũi tên trái phải để chuyển qua lại giữa các hóa đơn.\n\tEnter để quay lại menu chính. ");
                 WriteLine(); 
                 WriteLine("\t**************************************************");
                 WriteLine();
@@ -143,6 +140,7 @@ namespace StoreManage
                     if (page > 0 ) page--;
                     else page = _bills.Count - 1;
                 }
+                
                 Clear();
             } while (input.Key != ConsoleKey.Enter);
 
