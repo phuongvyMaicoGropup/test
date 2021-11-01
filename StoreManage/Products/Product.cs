@@ -34,6 +34,7 @@ namespace StoreManage.Products
         public virtual void Output()
         {
             _sResult.Add($"\tMã số sản phẩm   : {Id}\n");
+            _sResult.Add($"\tLoại sản phẩm    : {TypeProduct()}\n");
             _sResult.Add($"\tTên sản phẩm     : {Name}\n");
             _sResult.Add($"\tNơi sản xuất     : {Provider}\n");
             _sResult.Add($"\tĐơn giá          : {Price()} \n");

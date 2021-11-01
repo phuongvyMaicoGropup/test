@@ -116,25 +116,34 @@ namespace StoreManage.Helpers
             } while (string.IsNullOrEmpty(value));
         }
         //Helper.InputNumber("\t + Số điện thoại  : ", ref _phoneNumber);
-        public static void InputNumber(string content, ref string number)
+        public static void InputPhoneNumber(string content, ref string number)
         {
             bool check; 
             do
             {
                 check = true; 
                 Console.Write(content);
-                number = Console.ReadLine(); 
-                for (int i = 0; i<number.Length; i++)
+                number = Console.ReadLine();
+                if (number.Length < 10 || number.Length > 11) 
                 {
-                    if (number[i] >='a' && number[i]<='z'|| number[i] >= 'A' && number[i] <= 'Z')
-                    {
-                        Console.WriteLine("\tChỉ được phép nhập số .Vui lòng thử lại. ");
-                        check = false;
-                        break; 
-                    }
+                    Console.WriteLine("\tSố điện thoại sai định dạng. Yêu cầu số điện thoại dài từ 10 đến 11 số . Vui lòng nhập lại.");
+                    check = false;
+                }
+                else
+                {
+
+                     for (int i = 0; i<number.Length; i++)
+                     {
+                         if (number[i] >='a' && number[i]<='z'|| number[i] >= 'A' && number[i] <= 'Z')
+                         {
+                            Console.WriteLine("\tChỉ được phép nhập số .Vui lòng thử lại. ");
+                            check = false;
+                            break; 
+                         }
                 }
                 if (check == true) break; 
                  
+                }
             } while (check==false);
         }
 
