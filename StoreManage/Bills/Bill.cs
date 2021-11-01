@@ -88,8 +88,7 @@ namespace StoreManage
             do
             {
 
-                Write($"\tNhập thứ tự hóa đơn muốn xem hiện tại : ");
-                page = Convert.ToInt32(ReadLine());
+                Helper.AddQuantity($"\tNhập thứ tự hóa đơn muốn xem hiện tại : ",ref page);
                 if (page < 1 || page > _bills.Count)
                     WriteLine("\tHóa đơn không tồn tại. Vui lòng nhập lại. ");
             } while (page < 1 || page > _bills.Count);

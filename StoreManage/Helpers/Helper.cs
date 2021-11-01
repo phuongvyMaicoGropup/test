@@ -150,8 +150,10 @@ namespace StoreManage.Helpers
         //Helper.InputDate("\t - Ngày lập hóa đơn: ", ref _created);
         public static void InputDate(string content, ref Date date )
         {
+            bool check;
             do
             {
+                check = true; 
                 Console.WriteLine(content);
                 do
                 {
@@ -168,8 +170,29 @@ namespace StoreManage.Helpers
                     AddQuantity("\t  + Nhập năm   : ", ref date.Year);
                     if (date.Year < 1000) Console.WriteLine("\t=> Năm không dưới 1000. Vui lòng nhập lại. ");
                 } while (date.Year <1000);
-                if (date.Day >= 29 && date.Month == 2) Console.WriteLine("\tTháng 2 chỉ có 28 ngày. Vui lòng nhập lại. ");
-            } while (date.Day >= 29 && date.Month == 2);
+                if (date.Day == 29 && date.Month == 2)
+                {
+                    if (!(date.Year % 400 == 0 || (date.Year % 4 == 0 && date.Year % 100 != 0)))
+                    {
+                        check = false;
+                        Console.WriteLine("\tTháng 2 chỉ có 28 ngày. Vui lòng nhập lại. ");
+                    }
+                }
+                else if (date.Day > 29 && date.Month == 2)
+                {
+                    check = false;
+                    Console.WriteLine("\tTháng 2 chỉ có 28 ngày. Vui lòng nhập lại. ");
+                }    
+                if (date.Month == 4 || date.Month == 6 || date.Month == 9 || date.Month == 11)
+                {
+                    if (date.Day == 31)
+                    {
+                        Console.WriteLine("\tCác tháng 4,6,9,11 không có tồn tại ngày thứ 31. Vui lòng nhập lại! ");
+                        check = false; 
+                    }
+                }
+
+            } while (check == false);
 
         }
 
