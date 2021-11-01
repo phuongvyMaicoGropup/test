@@ -138,7 +138,7 @@ namespace StoreManage
                     if (page < _bills.Count-1) page++;
                     else page = 0; 
                 }
-                if (input.Key == ConsoleKey.LeftArrow)
+                else if (input.Key == ConsoleKey.LeftArrow)
                 {
                     if (page > 0 ) page--;
                     else page = _bills.Count - 1;
