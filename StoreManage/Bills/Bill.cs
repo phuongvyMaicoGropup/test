@@ -32,6 +32,50 @@ namespace StoreManage
             }
 
         }
+        public void CountingSort()
+        {
+
+            BillDetail[] outputBill = new BillDetail[_bills.Count()] ; // The output will have sorted input array
+            BillDetail max = (from bill in _bills
+                             orderby bill.TotalCost descending
+                             select bill).FirstOrDefault();
+            BillDetail min = (from bill in _bills
+                              orderby bill.TotalCost 
+                              select bill).FirstOrDefault();
+
+            for (int i = 0; i < _bills.Count(); i++)
+            {
+                if (_bills[i].TotalCost > max.TotalCost)
+                    max = _bills[i]; // Maximum value in array
+                else if (_bills[i].TotalCost < min.TotalCost)
+                    min = _bills[i]; // Minimum value in array
+            }
+
+            var k = (int)max.TotalCost - (int)min.TotalCost + 1; // Size of count array
+
+            int[] count_array = new int[k]; // Create a count_array to store count of each individual input value
+
+            for (int i = 0; i < _bills.Count(); i++)
+                count_array[(int)_bills[i].TotalCost - (int)min.TotalCost]++; // Store count of each individual input value
+
+            /* Change count_array so that count_array now contains actual
+             position of input values in output array */
+            for (int i = 1; i < k; i++)
+                count_array[i] += count_array[i - 1];
+
+
+            // Populate output array using count_array and input array
+            for (int i = 0; i < _bills.Count(); i++)
+            {
+                outputBill[count_array[(int)_bills[i].TotalCost - (int)min.TotalCost] - 1] = _bills[i];
+                count_array[(int)_bills[i].TotalCost - (int)min.TotalCost]--;
+            }
+
+
+            for (int i = 0; i < _bills.Count(); i++)
+                _bills[i] = outputBill[i]; // Copy the output array to input, so that input now contains sorted values
+
+        }
         public void PrintTxt()
         {
             FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\danh_sach_hoa_don.txt", FileMode.Create);

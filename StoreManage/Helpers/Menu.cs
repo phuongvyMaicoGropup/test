@@ -23,12 +23,15 @@ namespace StoreManage.Helpers
                 Console.WriteLine("\t1. Thêm hóa đơn ");
                 Console.WriteLine("\t2. Xem dữ liệu hóa đơn ");
                 Console.WriteLine("\t3. Xuất dữ liệu hóa đơn ");
-                Console.WriteLine("\t4. Thoát chương trình");
+                Console.WriteLine("\t4. Xắp xếp và xem các hóa đơn theo tổng tiền bằng thuật toán QuickSort: ");
+                Console.WriteLine("\t5. Xắp xếp và xem các hóa đơn theo tổng tiền bằng thuật toán Counting Sort: ");
+                Console.WriteLine("\t6. Xắp xếp và xem các hóa đơn theo tổng tiền bằng thuật toán QuickSort: ");
+                Console.WriteLine("\t7. Thoát chương trình");
                 Console.WriteLine();
                 Console.WriteLine("\t**************************");
                 Console.Write("\t=>Vui lòng nhập lựa chọn : ");
                 _option = Console.ReadLine();
-                if (_option == "1" || _option == "2" || _option == "3" || _option == "4") UI.Clear();
+                if (_option == "1" || _option == "2" || _option == "3" || _option == "4"|| _option == "5" || _option == "6" || _option == "7") UI.Clear();
 
                 switch (_option)
                 {
@@ -56,7 +59,31 @@ namespace StoreManage.Helpers
                         UI.Clear();
                         break;
                     case "4":
-                        UI.Exit(); 
+                        if (_bill.TotalBill == 0)
+                        {
+                            Console.WriteLine("\tChưa nhập hóa đơn. Vui lòng nhập lựa chọn khác!");
+                            break;
+                        }
+                        _bill.CountingSort(); 
+                        break;
+                    case "5":
+                        if (_bill.TotalBill == 0)
+                        {
+                            Console.WriteLine("\tChưa nhập hóa đơn. Vui lòng nhập lựa chọn khác!");
+                            break;
+                        }
+                        _bill.CountingSort(); 
+                        break;
+                    case "6":
+                        if (_bill.TotalBill == 0)
+                        {
+                            Console.WriteLine("\tChưa nhập hóa đơn. Vui lòng nhập lựa chọn khác!");
+                            break;
+                        }
+                        _bill.CountingSort();
+                        break;
+                    case "7":
+                        UI.Exit();
                         break;
                     default:
                         Console.WriteLine("\tVui lòng nhập lại . Chỉ được nhập 1 trong các mục trên! ");
